@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - 12.3.2
+  - 8.12.0
 
 before_install:
   - chmod +x travis/before_script.sh
