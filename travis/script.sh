@@ -2,3 +2,5 @@
 set -e
 
 npm test
+sonar-scanner
+coveralls
