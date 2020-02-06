@@ -41,6 +41,13 @@ This project includes it in source control so the coverage report can be viewed 
 
 ## Coding convention
 
+### For API REST
+
+API routes should follow the [REST] standard (https://fr.wikipedia.org/wiki/Representational_state_transfer)
+
+
+### For javascript languuages
+
 The guidelines (or Rules of coding in French) are conventions and rules which cover all the aspects of writing the code :
 - Indent
 - File naming and codebase organization / architecture.
