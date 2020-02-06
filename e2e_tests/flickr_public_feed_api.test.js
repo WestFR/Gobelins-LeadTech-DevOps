@@ -14,10 +14,10 @@ describe('flickr public feed api', () => {
   test('should return expected json format', () => {
     const apiTest = new API({
       tags: 'california',
-      tagmode: 'all'
+      tagmode: 'all',
     });
 
-    return got(apiTest).then(response => {
+    return got(apiTest).then((response) => {
       expect(response.statusCode).toBe(200);
 
       const photoFeed = jsonpHelper.parseJSONP(response.body);
@@ -26,7 +26,7 @@ describe('flickr public feed api', () => {
       const photos = photoFeed.items;
       expect(photos).toBeInstanceOf(Array);
 
-      photos.forEach(function(photo) {
+      photos.forEach((photo) => {
         expect(Object.keys(photo)).toEqual(
           expect.arrayContaining([
             'title',
@@ -37,8 +37,8 @@ describe('flickr public feed api', () => {
             'published',
             'author',
             'author_id',
-            'tags'
-          ])
+            'tags',
+          ]),
         );
       });
     });
@@ -47,10 +47,10 @@ describe('flickr public feed api', () => {
   test('should return many photos', () => {
     const apiTest = new API({
       tags: 'california, beach, blue',
-      tagmode: 'any'
+      tagmode: 'any',
     });
 
-    return got(apiTest).then(response => {
+    return got(apiTest).then((response) => {
       expect(response.statusCode).toBe(200);
 
       const photoFeed = jsonpHelper.parseJSONP(response.body);
@@ -65,10 +65,10 @@ describe('flickr public feed api', () => {
     // these tags should return zero results
     const apiTest = new API({
       tags: 'bad,parameters,abc,111,999',
-      tagmode: 'all'
+      tagmode: 'all',
     });
 
-    return got(apiTest).then(response => {
+    return got(apiTest).then((response) => {
       expect(response.statusCode).toBe(200);
 
       const photoFeed = jsonpHelper.parseJSONP(response.body);
