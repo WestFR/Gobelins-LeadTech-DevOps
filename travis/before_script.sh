@@ -5,4 +5,4 @@ set -e
 npm i
 
 # ESLint codebase convention
-#./node_modules/.bin/eslint ./ --fix
+./node_modules/.bin/eslint ./ --fix
