@@ -15,5 +15,5 @@ function hasValidFlickrAPIParams(tags, tagmode) {
 module.exports = {
   isValidCommaDelimitedList,
   isValidTagmode,
-  hasValidFlickrAPIParams
+  hasValidFlickrAPIParams,
 };

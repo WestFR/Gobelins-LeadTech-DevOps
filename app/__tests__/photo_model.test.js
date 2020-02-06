@@ -7,9 +7,8 @@ describe('getFlickrPhotos(tags, tagmode, callback)', () => {
 
   test('should return photos', () => {
     // mock the flickr public feed api endpoint
-    jest.doMock('got', () => {
-      return jest.fn(() => {
-        const jsonpData = `jsonFlickrFeed({
+    jest.doMock('got', () => jest.fn(() => {
+      const jsonpData = `jsonFlickrFeed({
             "items": [
               {
                 "title": "Boating",
@@ -25,11 +24,10 @@ describe('getFlickrPhotos(tags, tagmode, callback)', () => {
               }
             ]
           })`;
-        return Promise.resolve({
-          body: jsonpData
-        });
+      return Promise.resolve({
+        body: jsonpData,
       });
-    });
+    }));
 
     photoModel = require('../../app/photo_model');
 
@@ -39,36 +37,31 @@ describe('getFlickrPhotos(tags, tagmode, callback)', () => {
         media: {
           t: expect.stringMatching(/t.jpg/),
           m: expect.stringMatching(/m.jpg/),
-          b: expect.stringMatching(/b.jpg/)
-        }
-      }
+          b: expect.stringMatching(/b.jpg/),
+        },
+      },
     ];
 
-    return photoModel.getFlickrPhotos('california', 'all').then(photos => {
+    return photoModel.getFlickrPhotos('california', 'all').then((photos) => {
       expect(photos).toEqual(expect.arrayContaining(expectedSubset));
     });
   });
 
   test('should error when api returns 500 http status code', () => {
     // mock the flickr public feed api endpoint and return a 500 error
-    jest.doMock('got', () => {
-      return jest.fn(() => {
-        return Promise.reject('Response code 500 (Internal Server Error)');
-      });
-    });
+    jest.doMock('got', () => jest.fn(() => Promise.reject('Response code 500 (Internal Server Error)')));
 
     photoModel = require('../../app/photo_model');
 
-    return photoModel.getFlickrPhotos('california', 'all').catch(error => {
+    return photoModel.getFlickrPhotos('california', 'all').catch((error) => {
       expect(error.toString()).toMatch(/Response code 500/);
     });
   });
 
   test('should error with invalid jsonp data', () => {
     // mock the flickr public feed api endpoint with invalid jsonp data that's missing parentheses
-    jest.doMock('got', () => {
-      return jest.fn(() => {
-        const jsonpData = `jsonFlickrFeed{
+    jest.doMock('got', () => jest.fn(() => {
+      const jsonpData = `jsonFlickrFeed{
             "items": [
               {
                 "title": "Boating",
@@ -78,15 +71,14 @@ describe('getFlickrPhotos(tags, tagmode, callback)', () => {
               }
             ]
           }`;
-        return Promise.resolve({
-          body: jsonpData
-        });
+      return Promise.resolve({
+        body: jsonpData,
       });
-    });
+    }));
 
     photoModel = require('../../app/photo_model');
 
-    return photoModel.getFlickrPhotos('california', 'all').catch(error => {
+    return photoModel.getFlickrPhotos('california', 'all').catch((error) => {
       expect(error.toString()).toMatch(/Failed to convert jsonp to json/);
     });
   });
