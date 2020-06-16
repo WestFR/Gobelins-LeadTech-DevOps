@@ -24,7 +24,7 @@
     "express": "~4.16.2",
     "got": "^8.0.1",
     "jszip": "^3.2.2",
-    "moment": "^2.24.0",
+    "moment": "^2.26.0",
     "request": "^2.88.0",
     "serve-favicon": "^2.4.5",
     "zip-stream": "^2.1.3"
