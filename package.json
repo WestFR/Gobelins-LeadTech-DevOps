@@ -18,7 +18,7 @@
   "dependencies": {
     "@google-cloud/pubsub": "^1.4.1",
     "@google-cloud/storage": "^4.3.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "dotenv": "^8.2.0",
     "ejs": "~2.5.7",
     "express": "~4.16.2",
